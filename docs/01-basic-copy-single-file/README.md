@@ -1,57 +1,58 @@
-# 01 - Basic Single File Copy using Azure Data Factory
+# 01 - Basic File Copy using Azure Data Factory
 
 ## 1. Overview
 
-This project demonstrates a basic data movement pipeline using Azure Data Factory (ADF).
+This project demonstrates file movement using Azure Data Factory (ADF) and Azure Data Lake Storage Gen2 (ADLS Gen2).
 
-The pipeline copies a single file from a source folder in Azure Data Lake Storage Gen2 (ADLS Gen2) to a destination folder within the same storage account.
+Two pipeline implementations are covered:
+- Copying a single file using a predefined file path.
+- Copying a file using a dynamic file-name parameter.
 
-**Objective:** Understand the fundamentals of data integration using ADF, including linked services, datasets and Copy activity.
+**Objective:** Understand ADF linked services, datasets, Copy activity and pipeline parameters.
 
 ## 2. Architecture
 
-The following diagram illustrates how data moves from the source to the destination through Azure Data Factory.
+The following diagram illustrates the data movement between the source and destination in ADLS Gen2 through Azure Data Factory.
 
-![Single File Copy Architecture](./architecture.png)
+![File Copy Architecture](./architecture.png)
 
 ## 3. Azure Services and Components
 
 | Component | Purpose |
 |---|---|
-| Azure Data Factory | Orchestrates the data movement |
+| Azure Data Factory | Orchestrates data movement |
 | Azure Data Lake Storage Gen2 | Stores source and destination files |
 | Linked Service | Establishes the connection between ADF and ADLS Gen2 |
 | Source Dataset | Defines the input file location |
-| Sink Dataset | Defines the destination folder |
+| Sink Dataset | Defines the destination file location |
 | Copy Activity | Performs the file copy operation |
 
 ## 4. Authentication
 
-The pipeline uses the Data Factory System-assigned Managed Identity to authenticate with ADLS Gen2.
+The pipelines use the Data Factory System-assigned Managed Identity to authenticate with ADLS Gen2.
 
 The managed identity is granted the `Storage Blob Data Contributor` role on the storage account.
 
-This approach avoids storing storage account keys or credentials in the linked service.
+This avoids storing storage account keys or credentials in the linked service.
 
-## 5. Pipeline Implementation
+## 5. Pipeline Implementations
+
+### 5.1 Copy Single File (Without Parameters)
 
 **Pipeline name:** `pl_copy_single_file`
 
-**Activity:** Copy Data
+The pipeline copies a file from a predefined source location to a predefined destination location using the Copy Data activity.
 
-**Source:** ADLS Gen2 input folder
+**Implementation steps:**
+1. Created linked services for connecting to ADLS Gen2.
+2. Created source and sink datasets with predefined file paths.
+3. Added a Copy Data activity to the pipeline.
+4. Configured the source and destination datasets.
+5. Executed the pipeline and verified the copied file.
 
-**Destination:** ADLS Gen2 output folder
-
-The Copy activity uses the source and sink datasets to determine where to read and write the file.
-
-### 5.1 Pipeline Design
-
-The following screenshot shows the pipeline created in ADF Studio.
+**Pipeline design**
 
 ![ADF Pipeline Design](./screenshots/01-pipeline-design.png)
-
-### 5.2 Copy Activity Configuration
 
 **Source configuration**
 
@@ -61,55 +62,58 @@ The following screenshot shows the pipeline created in ADF Studio.
 
 ![Copy Activity Sink Configuration](./screenshots/02-copy-configuration_target.png)
 
-## 6. Execution and Validation
-
-The pipeline is triggered manually from ADF Studio.
-
-### 6.1 Pipeline Execution
-
-The Monitor view provides execution details, including the pipeline run status and Copy activity results.
+**Execution and output verification**
 
 ![Pipeline Execution](./screenshots/03-pipeline-execution.png)
 
-### 6.2 Output Verification
-
-The destination folder in ADLS Gen2 is checked to verify that the file was copied successfully.
-
 ![Output Verification](./screenshots/04-output-verification.png)
 
-## 7. Key Learnings
+### 5.2 Copy Single File (With File-Name Parameter)
 
-- Creating and configuring an Azure Data Factory instance.
-- Integrating ADF with ADLS Gen2.
+The pipeline was enhanced to accept a file name dynamically, allowing different files to be copied without modifying the dataset configuration.
+
+**Implementation steps:**
+1. Created a pipeline parameter named `fileName`.
+2. Parameterised the source dataset to accept the file name.
+3. Parameterised the sink dataset to use the same file name.
+4. Passed the file name when triggering the pipeline.
+5. Executed the pipeline and verified the copied file.
+
+**Demonstration:** [Watch Parameterised File Copy Demo](./videos/parameterised-file-copy.mp4)
+
+## 6. Key Learnings
+
+- Integrating Azure Data Factory with ADLS Gen2.
 - Configuring linked services using managed identity authentication.
-- Creating source and sink datasets.
-- Configuring and executing a Copy activity.
-- Monitoring pipeline execution.
+- Creating and configuring source and sink datasets.
+- Implementing Copy Data activities.
+- Using pipeline parameters for dynamic file selection.
+- Monitoring and validating pipeline execution.
 - Integrating ADF with GitHub for version control.
 
-## 8. Possible Enhancements
+## 7. Possible Enhancements
 
 - Copy multiple files from a folder.
-- Parameterise source and destination paths.
 - Use wildcard file selection.
 - Implement error handling and retry policies.
 - Introduce parallel file processing.
 
-## 9. Repository Structure
+## 8. Repository Structure
 
 ADF pipeline and related dataset and linked service definitions are maintained under the `adf/` directory.
 
-Documentation and supporting screenshots are maintained under:
+Documentation and supporting materials are maintained under:
 
 ```text
 docs/
 └── 01-basic-copy-single-file/
     ├── README.md
     ├── architecture.png
-    └── screenshots/
-        ├── 01-pipeline-design.png
-        ├── 02-copy-configuration_source.png
-        ├── 02-copy-configuration_target.png
-        ├── 03-pipeline-execution.png
-        └── 04-output-verification.png
-```
+    ├── screenshots/
+    │   ├── 01-pipeline-design.png
+    │   ├── 02-copy-configuration_source.png
+    │   ├── 02-copy-configuration_target.png
+    │   ├── 03-pipeline-execution.png
+    │   └── 04-output-verification.png
+    └── videos/
+        └── parameterised-file-copy.mp4
