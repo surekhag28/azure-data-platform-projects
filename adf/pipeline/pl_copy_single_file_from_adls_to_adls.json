@@ -49,13 +49,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "ds_datafiles_input_employee",
+						"referenceName": "ds_datafiles_input_file",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_datafiles_output_employee",
+						"referenceName": "ds_datafiles_output_file",
 						"type": "DatasetReference"
 					}
 				]

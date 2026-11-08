@@ -1,16 +1,24 @@
 {
-	"name": "ds_datafiles_input_employee",
+	"name": "ds_datafiles_input_file",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_surekhaadlsgen2",
 			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"p_file_name": {
+				"type": "string"
+			}
 		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "employee.csv",
+				"fileName": {
+					"value": "@dataset().p_file_name",
+					"type": "Expression"
+				},
 				"folderPath": "input",
 				"fileSystem": "datafiles"
 			},
