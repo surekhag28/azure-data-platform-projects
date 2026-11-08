@@ -4,7 +4,7 @@
 
 This project demonstrates file movement using Azure Data Factory (ADF) and Azure Data Lake Storage Gen2 (ADLS Gen2).
 
-Two pipeline implementations are covered:
+Two implementations are covered:
 - Copying a single file using a predefined file path.
 - Copying a file using a dynamic file-name parameter.
 
@@ -12,7 +12,7 @@ Two pipeline implementations are covered:
 
 ## 2. Architecture
 
-The following diagram illustrates the data movement between the source and destination in ADLS Gen2 through Azure Data Factory.
+The following diagram illustrates data movement between the source and destination in ADLS Gen2 through Azure Data Factory.
 
 ![File Copy Architecture](./architecture.png)
 
@@ -41,14 +41,13 @@ This avoids storing storage account keys or credentials in the linked service.
 
 **Pipeline name:** `pl_copy_single_file`
 
-The pipeline copies a file from a predefined source location to a predefined destination location using the Copy Data activity.
+Copies a file from a predefined source location to a predefined destination location using the Copy Data activity.
 
-**Implementation steps:**
-1. Created linked services for connecting to ADLS Gen2.
+**Implementation:**
+1. Created linked services to connect to ADLS Gen2.
 2. Created source and sink datasets with predefined file paths.
-3. Added a Copy Data activity to the pipeline.
-4. Configured the source and destination datasets.
-5. Executed the pipeline and verified the copied file.
+3. Added and configured a Copy Data activity.
+4. Executed the pipeline and verified the copied file.
 
 **Pipeline design**
 
@@ -72,22 +71,40 @@ The pipeline copies a file from a predefined source location to a predefined des
 
 The pipeline was enhanced to accept a file name dynamically, allowing different files to be copied without modifying the dataset configuration.
 
-**Implementation steps:**
-1. Created a pipeline parameter named `fileName`.
-2. Parameterised the source dataset to accept the file name.
-3. Parameterised the sink dataset to use the same file name.
-4. Passed the file name when triggering the pipeline.
-5. Executed the pipeline and verified the copied file.
+**Implementation:**
+1. Created a dataset parameter named `fileName`.
+2. Added a dataset parameter variable to dynamically reference the file name.
+3. Created a pipeline parameter named `fileName`.
+4. Passed the pipeline parameter value to the source and sink datasets.
+5. Executed the pipeline with a file name and verified the output.
 
-**Demonstration:** [Watch Parameterised File Copy Demo](./videos/parameterised-file-copy.mov)
+**Dataset parameter**
+
+![Dataset Parameter](./screenshots/06-dataset-parameter.png)
+
+**Dataset parameterisation**
+
+![Dataset Parameter Variable](./screenshots/07-dataset-parameter-variable.png)
+
+**Pipeline parameter**
+
+![Pipeline Parameter](./screenshots/08-pipeline-parameter.png)
+
+**Passing pipeline parameter to dataset**
+
+![Pipeline Parameter Variable](./screenshots/09-pipeline-parameter-variable.png)
+
+**Output verification**
+
+![Parameterised Copy Output Verification](./screenshots/10-output-verification.png)
 
 ## 6. Key Learnings
 
 - Integrating Azure Data Factory with ADLS Gen2.
-- Configuring linked services using managed identity authentication.
-- Creating and configuring source and sink datasets.
+- Configuring linked services using managed identity.
+- Creating source and sink datasets.
 - Implementing Copy Data activities.
-- Using pipeline parameters for dynamic file selection.
+- Using dataset and pipeline parameters for dynamic file selection.
 - Monitoring and validating pipeline execution.
 - Integrating ADF with GitHub for version control.
 
@@ -102,18 +119,21 @@ The pipeline was enhanced to accept a file name dynamically, allowing different 
 
 ADF pipeline and related dataset and linked service definitions are maintained under the `adf/` directory.
 
-Documentation and supporting materials are maintained under:
+Documentation and supporting screenshots are maintained under:
 
 ```text
 docs/
 └── 01-basic-copy-single-file/
     ├── README.md
     ├── architecture.png
-    ├── screenshots/
-    │   ├── 01-pipeline-design.png
-    │   ├── 02-copy-configuration_source.png
-    │   ├── 02-copy-configuration_target.png
-    │   ├── 03-pipeline-execution.png
-    │   └── 04-output-verification.png
-    └── videos/
-        └── parameterised-file-copy.mp4
+    └── screenshots/
+        ├── 01-pipeline-design.png
+        ├── 02-copy-configuration_source.png
+        ├── 02-copy-configuration_target.png
+        ├── 03-pipeline-execution.png
+        ├── 04-output-verification.png
+        ├── 06-dataset-parameter.png
+        ├── 07-dataset-parameter-variable.png
+        ├── 08-pipeline-parameter.png
+        ├── 09-pipeline-parameter-variable.png
+        └── 10-output-verification.png
