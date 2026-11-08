@@ -1,0 +1,57 @@
+{
+	"name": "ds_datafiles_input_employee",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_surekhaadlsgen2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "employee.csv",
+				"folderPath": "input",
+				"fileSystem": "datafiles"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "EmployeeNo",
+				"type": "String"
+			},
+			{
+				"name": "Ename",
+				"type": "String"
+			},
+			{
+				"name": "Job",
+				"type": "String"
+			},
+			{
+				"name": "Mgr",
+				"type": "String"
+			},
+			{
+				"name": "Hiredate",
+				"type": "String"
+			},
+			{
+				"name": "Salary",
+				"type": "String"
+			},
+			{
+				"name": "Commission",
+				"type": "String"
+			},
+			{
+				"name": "DepartmentNo",
+				"type": "String"
+			}
+		]
+	}
+}
