@@ -79,7 +79,7 @@ The pipeline was enhanced to accept a file name dynamically, allowing different 
 4. Passed the file name when triggering the pipeline.
 5. Executed the pipeline and verified the copied file.
 
-**Demonstration:** [Watch Parameterised File Copy Demo](./videos/parameterised-file-copy.mp4)
+**Demonstration:** [Watch Parameterised File Copy Demo](./videos/parameterised-file-copy.mov)
 
 ## 6. Key Learnings
 
