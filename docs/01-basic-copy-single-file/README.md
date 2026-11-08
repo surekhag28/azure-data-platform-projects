@@ -12,7 +12,7 @@ The pipeline copies a single file from a source folder in Azure Data Lake Storag
 
 The following diagram illustrates how data moves from the source to the destination through Azure Data Factory.
 
-![Single File Copy Architecture](architecture.png)
+![Single File Copy Architecture](./architecture.png)
 
 ## 3. Azure Services and Components
 
@@ -45,34 +45,37 @@ This approach avoids storing storage account keys or credentials in the linked s
 
 The Copy activity uses the source and sink datasets to determine where to read and write the file.
 
-### Pipeline Design
+### 5.1 Pipeline Design
 
 The following screenshot shows the pipeline created in ADF Studio.
 
-![ADF Pipeline Design](screenshots/01-pipeline-design.png)
+![ADF Pipeline Design](./screenshots/01-pipeline-design.png)
 
-### Copy Activity Configuration
+### 5.2 Copy Activity Configuration
 
-The following screenshot shows the source and sink configuration of the Copy activity.
+**Source configuration**
 
-![Copy Activity Configuration for source](screenshots/02-copy-configuration_source.png)
-![Copy Activity Configuration for target](screenshots/02-copy-configuration_target.png)
+![Copy Activity Source Configuration](./screenshots/02-copy-configuration_source.png)
+
+**Sink configuration**
+
+![Copy Activity Sink Configuration](./screenshots/02-copy-configuration_target.png)
 
 ## 6. Execution and Validation
 
 The pipeline is triggered manually from ADF Studio.
 
-### Pipeline Execution
+### 6.1 Pipeline Execution
 
 The Monitor view provides execution details, including the pipeline run status and Copy activity results.
 
-![Pipeline Execution](screenshots/03-pipeline-execution.png)
+![Pipeline Execution](./screenshots/03-pipeline-execution.png)
 
-### Output Verification
+### 6.2 Output Verification
 
 The destination folder in ADLS Gen2 is checked to verify that the file was copied successfully.
 
-![Output Verification](screenshots/04-output-verification.png)
+![Output Verification](./screenshots/04-output-verification.png)
 
 ## 7. Key Learnings
 
@@ -105,7 +108,8 @@ docs/
     ├── architecture.png
     └── screenshots/
         ├── 01-pipeline-design.png
-        ├── 02-copy-configuration.png
+        ├── 02-copy-configuration_source.png
+        ├── 02-copy-configuration_target.png
         ├── 03-pipeline-execution.png
         └── 04-output-verification.png
 ```
