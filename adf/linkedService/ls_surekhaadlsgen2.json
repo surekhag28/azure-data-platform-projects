@@ -1,0 +1,10 @@
+{
+	"name": "ls_surekhaadlsgen2",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://surekhaadlsgen2.dfs.core.windows.net/"
+		}
+	}
+}
