@@ -58,7 +58,7 @@ Instead of hardcoding individual tables in the pipeline, a configuration table s
 
 The following diagram illustrates the two data movement approaches implemented in this project.
 
-![Architecture Diagram](./screenshots/architecture.png)
+![Architecture Diagram](./architecture.png)
 
 ## 3. Implementation Steps
 
