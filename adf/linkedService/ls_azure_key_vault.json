@@ -1,0 +1,10 @@
+{
+	"name": "ls_azure_key_vault",
+	"properties": {
+		"annotations": [],
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://kv-data-eng-practice.vault.azure.net/"
+		}
+	}
+}
