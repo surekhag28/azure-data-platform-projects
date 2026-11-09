@@ -115,6 +115,7 @@ The pipeline was enhanced to accept a file name dynamically, allowing different 
 - Implement error handling and retry policies.
 - Introduce parallel file processing.
 
+
 ## 8. Repository Structure
 
 ADF pipeline and related dataset and linked service definitions are maintained under the `adf/` directory.
