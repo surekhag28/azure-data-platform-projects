@@ -8,7 +8,16 @@
 			"database": "DATASTORE",
 			"encrypt": "mandatory",
 			"trustServerCertificate": false,
-			"authenticationType": "SystemAssignedManagedIdentity"
+			"authenticationType": "SQL",
+			"userName": "surekhag1616",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "ls_azure_key_vault",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "sql-password"
+			}
 		}
 	}
 }
