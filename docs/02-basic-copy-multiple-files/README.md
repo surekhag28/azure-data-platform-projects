@@ -10,13 +10,7 @@ Two implementations are covered:
 
 **Objective:** Understand metadata-driven file processing, pipeline iteration, dynamic file naming and variable handling in ADF.
 
-## 2. Architecture
-
-The following diagram illustrates the flow of multiple files from the source to the destination in ADLS Gen2 using Azure Data Factory.
-
-![Multiple File Copy Architecture](./architecture.png)
-
-## 3. Azure Services and Components
+## 2. Azure Services and Components
 
 | Component | Purpose |
 |---|---|
@@ -27,15 +21,15 @@ The following diagram illustrates the flow of multiple files from the source to 
 | Copy Activity | Copies individual files |
 | Set Variable | Stores dynamically generated destination file names |
 
-## 4. Authentication
+## 3. Authentication
 
 The pipeline uses the Data Factory System-assigned Managed Identity to authenticate with ADLS Gen2.
 
 The managed identity is granted the `Storage Blob Data Contributor` role on the storage account.
 
-## 5. Pipeline Implementations
+## 4. Pipeline Implementations
 
-### 5.1 Multiple File Copy
+### 4.1 Multiple File Copy
 
 Copies multiple files from a source folder to a destination folder in ADLS Gen2.
 
@@ -47,7 +41,7 @@ Copies multiple files from a source folder to a destination folder in ADLS Gen2.
 4. Used ForEach to iterate through the retrieved files.
 5. Configured a Copy activity inside ForEach to copy each file to the destination folder.
 
-### 5.2 Multiple File Copy with Dynamic File Naming
+### 4.2 Multiple File Copy with Dynamic File Naming
 
 Enhanced the pipeline to dynamically rename destination files by appending the current date to the original file name.
 
@@ -82,7 +76,7 @@ For example:
 
 ![Output Validation](./screenshots/05-output-validation.png)
 
-## 6. Key Learnings
+## 5. Key Learnings
 
 - Retrieving file metadata using Get Metadata.
 - Using ForEach to iterate over multiple files.
@@ -91,7 +85,7 @@ For example:
 - Passing dynamic values to datasets.
 - Monitoring and validating pipeline execution.
 
-## 7. Repository Structure
+## 6. Repository Structure
 
 ADF pipeline and related dataset and linked service definitions are maintained under the `adf/` directory.
 
@@ -108,3 +102,4 @@ docs/
         ├── 03-dynamic-setting-filenames.png
         ├── 04-output-dataset-filename.png
         └── 05-output-validation.png
+```
