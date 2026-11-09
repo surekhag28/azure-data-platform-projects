@@ -58,7 +58,7 @@ Instead of hardcoding individual tables in the pipeline, a configuration table s
 
 The following diagram illustrates the two data movement approaches implemented in this project.
 
-![Architecture Diagram](screenshots/architecture-diagram)
+![Architecture Diagram](./screenshots/architecture.png)
 
 ## 3. Implementation Steps
 
@@ -184,19 +184,19 @@ Inside the ForEach activity:
 
 Shows the Copy activity configured with Azure SQL Database as the source.
 
-![Single Table Source](./screenshots/01-pipeline-source-single-table)
+![Single Table Source](./screenshots/01-pipeline-source-single-table.png)
 
 **2. Target Configuration**
 
 Shows the Copy activity configured with ADLS Gen2 as the destination.
 
-![Single Table Target](./screenshots/01-pipeline-target-single-table)
+![Single Table Target](./screenshots/02-pipeline-target-single-table.png)
 
 **3. Pipeline Execution Output**
 
 Shows the pipeline execution results and successful data movement.
 
-![Single Table Pipeline Output](./screenshots/03-pipeline-output)
+![Single Table Pipeline Output](./screenshots/03-pipeline-output.png)
 
 ### Section 2: Metadata-driven multiple-table copy
 
@@ -204,25 +204,25 @@ Shows the pipeline execution results and successful data movement.
 
 Shows the Lookup activity retrieving the source table names (`employee`, `department` and `customer`) from the SQL configuration table.
 
-![Lookup Configuration](./screenshots/04-lookup-config)
+![Lookup Configuration](./screenshots/04-lookup-config.png)
 
 **5. Dynamic Source Configuration**
 
 Shows the parameterised SQL source dataset, dynamically selecting the source table based on the current ForEach iteration.
 
-![Dynamic Source Configuration](./screenshots/05-pipeline-source-config)
+![Dynamic Source Configuration](./screenshots/05-pipeline-source-config.png)
 
 **6. Dynamic Target Configuration**
 
 Shows the parameterised ADLS Gen2 sink dataset, dynamically generating destination files for each source table.
 
-![Dynamic Target Configuration](./screenshots/05-pipeline-target-config)
+![Dynamic Target Configuration](./screenshots/05-pipeline-target-config.png)
 
 **7. Pipeline Execution and Validation**
 
 Shows the pipeline execution results and validation of the multiple-table copy operation.
 
-![Pipeline Validation](./screenshots/07-pipeline-validation)
+![Pipeline Validation](./screenshots/07-pipeline-validation.png)
 
 ## 5. Key Concepts Covered
 

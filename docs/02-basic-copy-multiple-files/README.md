@@ -62,7 +62,7 @@ For example:
 
 **Get Metadata configuration**
 
-![Get Metadata](./screenshots/02-get-meadata.png)
+![Get Metadata](./screenshots/02-get-metadata.png)
 
 **Dynamic file name generation**
 
