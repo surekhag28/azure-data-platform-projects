@@ -1,0 +1,29 @@
+{
+	"name": "ls_adlstorage_customers",
+	"properties": {
+		"parameters": {
+			"l_account_url": {
+				"type": "String"
+			},
+			"l_account_key": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "@{linkedService().l_account_url}",
+			"accountKey": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "ls_azure_key_vault",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": {
+					"value": "@linkedService().l_account_key",
+					"type": "Expression"
+				}
+			}
+		}
+	}
+}
