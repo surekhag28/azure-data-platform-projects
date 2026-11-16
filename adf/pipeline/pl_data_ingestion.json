@@ -1,0 +1,105 @@
+{
+	"name": "pl_data_ingestion",
+	"properties": {
+		"activities": [
+			{
+				"name": "Lookup_Config",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": {
+							"value": "select *,\n    GETDATE() as CurrentWaterMark\nfrom sales.etl_metadata\nwhere IsActive=1",
+							"type": "Expression"
+						},
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "ds_az_sql_DATASTORE",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "IterateObjects",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Lookup_Config",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('Lookup_Config').output.value",
+						"type": "Expression"
+					},
+					"isSequential": true,
+					"activities": [
+						{
+							"name": "Execute Pipeline1",
+							"type": "ExecutePipeline",
+							"dependsOn": [],
+							"policy": {
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"pipeline": {
+									"referenceName": "pl_data_load_child",
+									"type": "PipelineReference"
+								},
+								"waitOnCompletion": true,
+								"parameters": {
+									"pSourceSchema": {
+										"value": "@item().SourceSchema",
+										"type": "Expression"
+									},
+									"pSourceTable": {
+										"value": "@item().SourceTable",
+										"type": "Expression"
+									},
+									"pWatermarkColumn": {
+										"value": "@item().WatermarkColumn",
+										"type": "Expression"
+									},
+									"pLastWatermark": {
+										"value": "@item().LastWatermark",
+										"type": "Expression"
+									},
+									"pCurrentWaterMark": {
+										"value": "@item().CurrentWaterMark",
+										"type": "Expression"
+									},
+									"pLoadType": {
+										"value": "@item().LoadType",
+										"type": "Expression"
+									},
+									"pTargetPath": {
+										"value": "@item().TargetPath",
+										"type": "Expression"
+									}
+								}
+							}
+						}
+					]
+				}
+			}
+		],
+		"annotations": []
+	}
+}

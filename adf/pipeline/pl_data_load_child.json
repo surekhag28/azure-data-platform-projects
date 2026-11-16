@@ -53,7 +53,7 @@
 								"source": {
 									"type": "AzureSqlSource",
 									"sqlReaderQuery": {
-										"value": "select * \nfrom @{pipeline().parameters.pSourceSchema}.@{pipeline().parameters.pSourceTable} \nwhere @{pipeline().parameters.pWatermarkColumn} > @{pipeline().parameters.pLastWatermark}\nand @{pipeline().parameters.pWatermarkColumn} <= @{pipeline().parameters.pCurrentWaterMark}",
+										"value": "select * \nfrom @{pipeline().parameters.pSourceSchema}.@{pipeline().parameters.pSourceTable} \nwhere @{pipeline().parameters.pWatermarkColumn} > '@{pipeline().parameters.pLastWatermark}'\nand @{pipeline().parameters.pWatermarkColumn} <= '@{pipeline().parameters.pCurrentWaterMark}'",
 										"type": "Expression"
 									},
 									"queryTimeout": "02:00:00",
@@ -538,12 +538,10 @@
 		],
 		"parameters": {
 			"pSourceSchema": {
-				"type": "string",
-				"defaultValue": "sales"
+				"type": "string"
 			},
 			"pSourceTable": {
-				"type": "string",
-				"defaultValue": "Products"
+				"type": "string"
 			},
 			"pWatermarkColumn": {
 				"type": "string"
@@ -552,16 +550,13 @@
 				"type": "string"
 			},
 			"pCurrentWaterMark": {
-				"type": "string",
-				"defaultValue": "2026-11-16 00:00:00.000"
+				"type": "string"
 			},
 			"pLoadType": {
-				"type": "string",
-				"defaultValue": "Full"
+				"type": "string"
 			},
 			"pTargetPath": {
-				"type": "string",
-				"defaultValue": "bronze/products"
+				"type": "string"
 			}
 		},
 		"variables": {
