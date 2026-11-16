@@ -1,0 +1,12 @@
+{
+	"name": "ds_az_sql_DATASTORE",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_az_sql",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	}
+}
